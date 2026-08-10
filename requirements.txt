@@ -1,0 +1,8 @@
+pytest
+playwright
+openpyxl
+pytest-xdist # To run parllely
+pytest-html # To generate reports locally
+Faker # To import fake data
+allure-pytest # To Generate the reports in CI
+pytest-rerunfailures # To run failure test cases
