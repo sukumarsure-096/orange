@@ -7,7 +7,7 @@ from DataDriven.data_driven import import_data_from_json, import_data_from_csv
 from playwright.sync_api import expect
 from DataDriven.faker_data import FakeData
 
-data = import_data_from_json('/Users/google/Documents/orange/TestData/login_data.json')
+data = import_data_from_json('TestData/login_data.json')
 
 @pytest.mark.parametrize('testcase, un, pwd, results', data)
 def test_login_with_valid_and_invalid_data(page, testcase, un, pwd, results):
