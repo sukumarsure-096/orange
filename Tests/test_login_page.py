@@ -26,3 +26,11 @@ def test_login_invalid_data(page):
     pwd = fd.get_password()
     lp.login(un, pwd)
     expect(lp.invalid_credentials).to_be_visible()
+
+def test_forgot_password(page):
+    lp = LoginPage(page)
+    lp.click_forgot_password()
+    lp.enter_username__forgot_password('xyz')
+    lp.click_cancel_button()
+    expect(lp.username).to_be_visible()
+

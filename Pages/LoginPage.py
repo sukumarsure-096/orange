@@ -11,6 +11,8 @@ class LoginPage:
         self.logout_button = self.page.locator("//a[text()='Logout']")
         self.dashboard = self.page.locator("//h6[text()='Dashboard']")
         self.invalid_credentials = self.page.get_by_text('Invalid credentials')
+        self.forgot_password_link = self.page.get_by_text('Forgot your password? ')
+        self.cancel_button = self.page.get_by_text(' Cancel ')
 
     def enter_username(self, user_name):
         try:
@@ -45,6 +47,27 @@ class LoginPage:
             self.logout_button.click()
         except Exception as e:
             print(f'while clicking the logout button  as {e}')
+            raise
+
+    def click_forgot_password(self):
+        try:
+            self.forgot_password_link.click()
+        except Exception as e:
+            print(f'while clicking the forgot password link as {e}')
+            raise
+
+    def enter_username__forgot_password(self, username):
+        try:
+            self.username.fill(username)
+        except Exception as e:
+            print(f'while entering the username in forgot password {e}')
+            raise
+
+    def click_cancel_button(self):
+        try:
+            self.cancel_button.click()
+        except Exception as e:
+            print(f'while entering the username in forgot password {e}')
             raise
 
     def login(self, username, password):
