@@ -1,5 +1,5 @@
 pytest
-playwright
+pytest-playwright
 openpyxl
 pytest-xdist # To run parllely
 pytest-html # To generate reports locally
