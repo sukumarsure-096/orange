@@ -17,7 +17,7 @@ jobs:
     - name : Set up Python
       uses : actions/setup-Python@v5
       with:
-        python-verison : 3.14
+        python-verison : '3.11'
 
     - name : Install Dependencies
       run : |
@@ -29,4 +29,4 @@ jobs:
 
     - name : Run Tests
       run : |
-          pytest Tests/ --screnshot only-on-failure only-on-failure --html = reports.html --self-contained-html
+          pytest Tests/ --screnshot only-on-failure --html = report.html --self-contained-html
