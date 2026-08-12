@@ -3,7 +3,7 @@ import pytest
 
 @pytest.fixture(scope='session')
 def browser_content(playwright:Playwright):
-    browser = playwright.firefox.launch(headless=False)
+    browser = playwright.chromium.launch(headless=False)
     context = browser.new_context()
 
     yield context
