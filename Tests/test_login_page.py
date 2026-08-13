@@ -32,5 +32,5 @@ def test_forgot_password(page):
     lp.click_forgot_password()
     lp.enter_username__forgot_password('xyz')
     lp.click_cancel_button()
-    expect(lp.username).to_be_visible()
+    expect(lp.username1).to_be_visible()
 
