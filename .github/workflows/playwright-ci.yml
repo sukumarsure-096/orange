@@ -29,7 +29,7 @@ jobs:
 
     - name : Run Tests
       run : |
-          pytest Tests/ --browser chromium --screenshot only-on-failure --html=report.html --self-contained-html
+          pytest Tests/ --browser chromium --channel chrome --browser firefox -n 2 --screenshot only-on-failure --html=report.html --self-contained-html
     
     - name: Upload Test Report
       if: always()
