@@ -4,7 +4,7 @@ import pytest
 
 @pytest.fixture(scope='session')
 def browser_content(playwright:Playwright):
-    browser = playwright.chromium.launch(headless=False)
+    browser = playwright.chromium.launch(headless=True)
     context = browser.new_context(viewport={"width": 1280 , "height": 720})
     yield context
     context.close()
