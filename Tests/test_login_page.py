@@ -12,6 +12,7 @@ from DataDriven.faker_data import FakeData
 data = import_data_from_json('TestData/login_data.json')
 
 # @pytest.mark.skip
+@pytest.mark.regression
 @pytest.mark.parametrize('testcase, un, pwd, results', data)
 def test_login_with_valid_and_invalid_data(page, testcase, un, pwd, results):
     lp = LoginPage(page)
@@ -22,6 +23,7 @@ def test_login_with_valid_and_invalid_data(page, testcase, un, pwd, results):
     else:
         expect(lp.invalid_credentials).to_be_visible()
 
+@pytest.mark.sanity
 def test_login_invalid_data(page):
     lp = LoginPage(page)
     fd = FakeData()
@@ -30,6 +32,7 @@ def test_login_invalid_data(page):
     lp.login(un, pwd)
     expect(lp.invalid_credentials).to_be_visible()
 
+@pytest.mark.sanity
 def test_forgot_password(page):
     lp = LoginPage(page)
     lp.click_forgot_password()

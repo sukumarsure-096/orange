@@ -3,7 +3,9 @@ import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from Pages.LoginPage import LoginPage
 from Pages.DirectoryPage import Directory
+import pytest
 
+@pytest.mark.regression
 def test_directory_page(page):
     lp = LoginPage(page)
     dp = Directory(page)
