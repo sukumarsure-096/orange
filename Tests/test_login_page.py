@@ -11,6 +11,7 @@ from DataDriven.faker_data import FakeData
 
 data = import_data_from_json('TestData/login_data.json')
 
+# @pytest.mark.skip
 @pytest.mark.parametrize('testcase, un, pwd, results', data)
 def test_login_with_valid_and_invalid_data(page, testcase, un, pwd, results):
     lp = LoginPage(page)
@@ -36,10 +37,11 @@ def test_forgot_password(page):
     lp.click_cancel_button()
     expect(lp.username).to_be_visible()
 
-def test_login_for_admin(page):
-    lp = LoginPage(page)
-    ap = AdminPage(page)
-    lp.login('Admin','admin123')
-    ap.admin_page()
-    ap.user_name()
-    ap.user_role()
+
+# def test_login_for_admin(page):
+#     lp = LoginPage(page)
+#     ap = AdminPage(page)
+#     lp.login('Admin','admin123')
+#     ap.admin_page()
+#     ap.enter_user_name('Admin')
+#     ap.select_user_role('Admin')

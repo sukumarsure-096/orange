@@ -4,7 +4,9 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from playwright.sync_api import Playwright, expect
 from Pages.AdminPage import AdminPage
 from Pages.LoginPage import LoginPage
+import pytest
 
+# @pytest.mark.skip
 def test_admin_page(page):
     ap = AdminPage(page)
     lp = LoginPage(page)
@@ -16,3 +18,5 @@ def test_admin_page(page):
     ap.select_user_role('Admin')
     ap.enter_employee_name('Lisa')
     ap.click_search()
+    lp.click_profile_icon()
+    lp.click_logout_button()

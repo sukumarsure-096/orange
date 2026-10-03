@@ -13,5 +13,6 @@ def test_directory_page(page):
     dp.select_jobtitle()
     dp.select_location()
     dp.click_search_button()
-
+    lp.click_profile_icon()
+    lp.click_logout_button()
 
