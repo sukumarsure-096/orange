@@ -7,7 +7,7 @@ from playwright.sync_api import expect
 import pytest
 
 images = ['/Users/google/Downloads/qrcode_www.google.com.png']
-more_mb_img = ['/Users/google/Downloads/gemini.jpeg']
+more_mb_img = ['/Users/google/Documents/orange/gemini.jpeg']
 more_images = ['/Users/google/Documents/orange/Testing.png', '/Users/google/Documents/orange/Tests/drop.png']
 
 
