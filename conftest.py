@@ -15,7 +15,7 @@ import os
 
 @pytest.fixture(scope='session')
 def browser_content(playwright:Playwright,browser_type : BrowserType):
-    browser = browser_type.launch(headless=False)
+    browser = browser_type.launch(headless=True)
     context = browser.new_context()
     yield context
     context.storage_state()
