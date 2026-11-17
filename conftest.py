@@ -1,7 +1,7 @@
 import base64
 from playwright.sync_api import Playwright, Page, BrowserType
 import pytest
-
+import os
 # @pytest.fixture(scope='session')
 # def browser_content(playwright:Playwright, browser_channel):
 #     if browser_channel == 'chromium':
@@ -15,9 +15,10 @@ import pytest
 
 @pytest.fixture(scope='session')
 def browser_content(playwright:Playwright,browser_type : BrowserType):
-    browser = browser_type.launch(headless=True)
+    browser = browser_type.launch(headless=False)
     context = browser.new_context()
     yield context
+    context.storage_state()
     context.close()
     browser.close()
 
@@ -28,13 +29,6 @@ def page(browser_content):
     yield page
     page.close()
 
-
-# @pytest.fixture(scope='function')
-# def page_lauch(page:Page):
-#     # page = browser_content.new_page()
-#     page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
-#     yield page
-#     page.close()
 
 # --- ADD THIS HOOK FOR CI/CD HTML SCREENSHOTS ---
 @pytest.hookimpl(hookwrapper=True)
