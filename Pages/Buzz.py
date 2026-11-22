@@ -48,9 +48,9 @@ class BuzzPage:
         self.no_posts = self.page.get_by_text('No Posts Available')
 
         # Images
-        self.images = ['/images/drop.png']
-        self.more_mb_img = ['images/gemini.jpeg']
-        self.more_images = ['images/Testing.png', '/images/drop.png']
+        self.images = ['drop.png']
+        self.more_mb_img = ['gemini.jpeg']
+        self.more_images = ['Testing.png', 'drop.png']
 
 
     def clicking_buzz_link(self):
@@ -68,7 +68,8 @@ class BuzzPage:
     def uploading_the_image(self, image):
         try:
             for img in image:
-                self.file_upload.set_input_files(img)
+                image_path = Path(__file__).parent.parent / "images" /img
+                self.file_upload.set_input_files(str(image_path))
                 self.page.wait_for_timeout(5000)
         except Exception as e:
             print(f"exception while entering the post data {e}")
