@@ -1,4 +1,5 @@
 from playwright.sync_api import Page
+from pathlib import Path
 
 class BuzzPage:
     def __init__(self, page:Page):
@@ -47,9 +48,9 @@ class BuzzPage:
         self.no_posts = self.page.get_by_text('No Posts Available')
 
         # Images
-        self.images = ['/Users/google/Documents/orange/images/drop.png']
-        self.more_mb_img = ['/Users/google/Documents/orange/images/gemini.jpeg']
-        self.more_images = ['/Users/google/Documents/orange/images/Testing.png', '/Users/google/Documents/orange/images/drop.png']
+        self.images = ['/images/drop.png']
+        self.more_mb_img = ['images/gemini.jpeg']
+        self.more_images = ['images/Testing.png', '/images/drop.png']
 
 
     def clicking_buzz_link(self):
