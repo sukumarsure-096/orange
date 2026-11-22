@@ -16,8 +16,8 @@ data = import_data_from_json('TestData/login_data.json')
 #@pytest.mark.skip
 @pytest.mark.regression
 @pytest.mark.parametrize('testcase, un, pwd, results', data)
-def test_login_with_valid_and_invalid_data(page, testcase, un, pwd, results):
-    lp = LoginPage(page)
+def test_login_with_valid_and_invalid_data(login_page, testcase, un, pwd, results):
+    lp = LoginPage(login_page)
     lp.login(un,pwd)
     if results == 'success':
         lp.click_profile_icon()
@@ -27,8 +27,8 @@ def test_login_with_valid_and_invalid_data(page, testcase, un, pwd, results):
 
 #@pytest.mark.skip
 @pytest.mark.sanity
-def test_login_invalid_data(page):
-    lp = LoginPage(page)
+def test_login_invalid_data(login_page):
+    lp = LoginPage(login_page)
     fd = FakeData()
     un = fd.get_user_name()
     pwd = fd.get_password()
@@ -37,8 +37,8 @@ def test_login_invalid_data(page):
 
 #@pytest.mark.skip
 @pytest.mark.sanity
-def test_forgot_password(page):
-    lp = LoginPage(page)
+def test_forgot_password(login_page):
+    lp = LoginPage(login_page)
     lp.click_forgot_password()
     lp.enter_username__forgot_password('xyz')
     lp.click_cancel_button()

@@ -26,6 +26,7 @@ class BuzzPage:
         
         #locator related to recent posts
         self.posted_time = self.page.locator('p.oxd-text.oxd-text--p.orangehrm-buzz-post-time')
+        self.first_time_posted = self.page.locator("p.oxd-text.oxd-text--p.orangehrm-buzz-post-time").nth(0)
         self.most_recent_posts = self.page.get_by_text(" Most Recent Posts ")
         self.most_recent_post_actions = self.page.locator("div.orangehrm-buzz-post-actions").first
         self.most_recent_post_actions_message = self.most_recent_post_actions.locator(">button").first
@@ -34,6 +35,7 @@ class BuzzPage:
         self.most_recent_post_actions_share_comment = self.page.get_by_placeholder("What's on your mind?").nth(1)
         self.most_recent_post_actions_share_title = self.page.get_by_text('Share Post')
         self.most_recent_post_actions_share_close = self.page.locator("//button[text()='×']")
+        self.most_recent_posts_item = self.page.locator("div.orangehrm-buzz-post").all()
 
         #locator -> most liked posts
         self.most_liked_post = self.page.get_by_text(' Most Liked Posts ')
@@ -43,6 +45,11 @@ class BuzzPage:
         #locator -> most recent comment posts
         self.most_comment_post = self.page.get_by_text(' Most Commented Posts ')
         self.no_posts = self.page.get_by_text('No Posts Available')
+
+        # Images
+        self.images = ['/Users/google/Documents/orange/images/drop.png']
+        self.more_mb_img = ['/Users/google/Documents/orange/images/gemini.jpeg']
+        self.more_images = ['/Users/google/Documents/orange/images/Testing.png', '/Users/google/Documents/orange/images/drop.png']
 
 
     def clicking_buzz_link(self):
@@ -70,7 +77,13 @@ class BuzzPage:
         try:
             self.most_recent_posts.click()
             self.page.wait_for_timeout(5000)
-            print(self.posted_time.all_inner_texts())
+            if len(self.posted_time.all()) > 0:
+                first_time = self.posted_time.all_inner_texts()[0]
+                sec_time = self.first_time_posted.inner_text()
+                assert first_time == sec_time
+            else :
+                print('no posts')
+
         except Exception as e:
             print(f"exception while entering the post data {e}")
             raise e

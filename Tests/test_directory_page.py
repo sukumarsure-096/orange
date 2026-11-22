@@ -1,20 +1,13 @@
 import os
 import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from Pages.LoginPage import LoginPage
 from Pages.DirectoryPage import Directory
 import pytest
 from playwright.sync_api import expect
 
-# def test_login_with_valid_credentials(page):
-#     lp = LoginPage(page)
-#     lp.login('Admin','admin123')
-
 # @pytest.mark.skip
 def test_directory_page(page):
-    lp = LoginPage(page)
     dp = Directory(page)
-    lp.login('Admin', 'admin123')
     dp.click_directory_link()
     dp.enter_employee_name('Mac')
     dp.select_jobtitle()
@@ -55,8 +48,4 @@ def test_directory_with_location(page):
     else:
         expect(dp.records_found).to_be_visible()
 
-def test_logout_admin(page):
-    lp = LoginPage(page)
-    lp.click_profile_icon()
-    lp.click_logout_button()
 

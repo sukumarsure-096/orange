@@ -1,22 +1,10 @@
 import os
 import sys
 sys.path.append(os.path.join(os.path.dirname(__file__),'..'))
-from Pages.LoginPage import LoginPage
 from Pages.Buzz import BuzzPage
 from playwright.sync_api import expect
 import pytest
 
-images = ['/Users/google/Downloads/qrcode_www.google.com.png']
-more_mb_img = ['/Users/google/Documents/orange/gemini.jpeg']
-more_images = ['/Users/google/Documents/orange/Testing.png', '/Users/google/Documents/orange/Tests/drop.png']
-
-
-@pytest.mark.regression
-def test_login_with_valid_credentials(page):
-    lp = LoginPage(page)
-    lp.login('Admin','admin123')
-    bp = BuzzPage(page)
-    bp.clicking_buzz_link()
 
 # @pytest.mark.skip
 def test_add_and_remove_photo(page):
@@ -24,7 +12,7 @@ def test_add_and_remove_photo(page):
     bp.clicking_buzz_link()
     bp.clicking_on_share_photo()
     expect(bp.share).to_be_disabled()
-    bp.uploading_the_image(images)
+    bp.uploading_the_image(bp.images)
     expect(bp.images_uploaded).to_be_visible()
     expect(bp.share).to_be_enabled()
     bp.click_remove_photo_icon()
@@ -37,15 +25,18 @@ def test_upload_more_mb_image(page):
     bp = BuzzPage(page)
     bp.clicking_buzz_link()
     bp.clicking_on_share_photo()
-    bp.uploading_the_image(more_mb_img)
+    bp.uploading_the_image(bp.more_mb_img)
     expect(bp.more_mb_error_message).to_be_visible()
+    bp.click_close_share_photo_popup()
 
 #@pytest.mark.skip
 def test_upload_more_images(page):
     bp = BuzzPage(page)
-    bp.uploading_the_image(more_images)
+    bp.clicking_buzz_link()
+    bp.clicking_on_share_photo()
+    bp.uploading_the_image(bp.more_images)
     total_images = bp.images_uploaded.all()
-    assert len(total_images) == len(more_images)
+    assert len(total_images) == len(bp.more_images)
     bp.click_close_share_photo_popup()
 
 #@pytest.mark.skip
@@ -61,20 +52,23 @@ def test_share_vedio(page):
     expect(bp.share_video_popup_close).not_to_be_visible()
 
 
-#@pytest.mark.skip
+@pytest.mark.regression
 def test_most_recent_posts(page):
     bp = BuzzPage(page)
+    bp.clicking_buzz_link()
     bp.clicking_on_share_photo()
-    bp.uploading_the_image(images)
+    bp.uploading_the_image(bp.images)
     total_images = bp.images_uploaded.all()
     # print(len(total_images))
-    assert len(total_images) == len(images)
+    assert len(total_images) == len(bp.images)
     bp.click_close_video_popup()
+    bp.most_recent_post()
 
 # #@pytest.mark.skip
 def test_most_recent_posts_action(page):
     bp = BuzzPage(page)
-    if  bp.no_posts_available() != 'No Posts Available':
+    bp.clicking_buzz_link()
+    if len(bp.posted_time.all())>0:
         print('pOSt AVIALABLE')
         bp.post_action_message()
         bp.post_action_share()
@@ -89,9 +83,9 @@ def test_most_recent_posts_action(page):
 #@pytest.mark.skip
 def test_most_liked_posts(page):
     bp = BuzzPage(page)
+    bp.clicking_buzz_link()
     bp.click_most_liked_posts()
-    # bp.no_posts_available()
-    if  bp.no_posts_available() != 'No Posts Available':
+    if  len(bp.most_recent_posts_item) >= 1:
         print('pOSt AVIALABLE')
         bp.post_action_message()
         bp.post_action_share()
@@ -110,13 +104,6 @@ def test_most_liked_posts(page):
     else :
         print('No Posts available')
         expect(bp.no_posts).to_be_visible()
-        
-
-
-def test_logout(page):
-    lp = LoginPage(page)
-    lp.click_profile_icon()
-    lp.click_logout_button()
 
 
 
